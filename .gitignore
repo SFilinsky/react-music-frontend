@@ -23,6 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
-workspace.xml
 /git
+/.idea/workspace.xml
 /.idea/watcherTasks.xml
