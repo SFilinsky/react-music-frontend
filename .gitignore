@@ -25,3 +25,4 @@ yarn-error.log*
 package-lock.json
 workspace.xml
 /git
+/.idea/watcherTasks.xml
