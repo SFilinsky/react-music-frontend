@@ -3,10 +3,18 @@ module.exports = {
     parserOptions: {
         project: 'tsconfig.json',
         sourceType: 'module',
+        ecmaVersion: 6,
+        ecmaFeatures: {
+            jsx: true,
+        }
     },
-    plugins: ['@typescript-eslint/eslint-plugin'],
+    plugins: [
+        '@typescript-eslint/eslint-plugin',
+        'prettier',
+    ],
     extends: [
         'eslint:all',
+        'prettier',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
     ],
@@ -30,5 +38,6 @@ module.exports = {
         'class-methods-use-this': 'off',
         'init-declarations': 'off',
         'sort-vars': 'off',
+        "prettier/prettier": ["error"]
     },
 };
