@@ -1,0 +1,30 @@
+.rm-auth {
+  justify-content: center;
+  align-items: center;
+}
+
+.rm-auth .p-card {
+  width: 15rem;
+  height: fit-content;
+  flex: 0 0 auto;
+}
+
+.rm-auth .input-field {
+  margin-bottom: 1rem;
+}
+
+.rm-auth form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  label {
+    text-align: left;
+  }
+
+  .p-button {
+    width: 100%;
+    margin: 0.5rem auto 0.5rem;
+  }
+}
