@@ -15,10 +15,8 @@
   flex-direction: column;
   width: 100%;
   height: 100%; }
-
-.rm-auth form label {
-  text-align: left; }
-
-.rm-auth form .p-button {
-  width: 100%;
-  margin: 0.5rem auto 0.5rem; }
+  .rm-auth form label {
+    text-align: left; }
+  .rm-auth form .p-button {
+    width: 100%;
+    margin: 0.5rem auto 0.5rem; }

@@ -53,7 +53,11 @@ class Register extends React.Component {
     if (match) {
       label = <label></label>;
     } else {
-      label = <label className="h5">Passwords do not match</label>;
+      label = (
+        <div className="margi">
+          <label className="h5">Passwords do not match</label>
+        </div>
+      );
     }
     return label;
   }

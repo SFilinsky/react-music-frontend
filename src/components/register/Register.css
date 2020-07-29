@@ -7,6 +7,10 @@
   height: fit-content;
   flex: 0 0 auto; }
 
+.margi {
+  margin-top: -1rem;
+  color: red; }
+
 .rm-register form {
   width: 100%;
   height: 100%; }
