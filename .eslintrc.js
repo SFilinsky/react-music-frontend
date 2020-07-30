@@ -28,6 +28,8 @@ module.exports = {
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        'default-param-last': 'off',
+        'one-var': 'off',
         'new-cap': 'off',
         'no-useless-constructor': 'off',
         'sort-keys': 'off',
@@ -38,6 +40,8 @@ module.exports = {
         'class-methods-use-this': 'off',
         'init-declarations': 'off',
         'sort-vars': 'off',
+        'no-return-assign': 'off',
+        'no-ternary': 'off',
         "prettier/prettier": ["error"]
     },
 };

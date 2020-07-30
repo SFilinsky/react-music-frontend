@@ -1,12 +1,20 @@
-import React, { FormEvent } from 'react';
+import React, { createRef, FormEvent, RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.scss';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
+import ReactDOM from 'react-dom';
 
 class Auth extends React.Component {
+  wrapper = createRef();
+
+  componentDidMount() {
+    const node = ReactDOM.findDOMNode(this);
+    /* Uses DOM node  */
+  }
+
   state = {
     form: {
       login: '',
@@ -37,7 +45,7 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div className="rm-auth">
+      <div ref={this.wrapper as RefObject<HTMLDivElement>} className="rm-auth">
         <Card>
           <form onSubmit={this.handleSubmit}>
             <div className="input-field">
