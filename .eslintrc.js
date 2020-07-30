@@ -42,6 +42,7 @@ module.exports = {
         'sort-vars': 'off',
         'no-return-assign': 'off',
         'no-ternary': 'off',
-        "prettier/prettier": ["error"]
+        "prettier/prettier": ["error"],
+        "max-lines-per-function": "warn",
     },
 };

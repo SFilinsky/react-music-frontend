@@ -16,6 +16,7 @@ class Register extends React.Component {
       email: '',
       validPassword: '',
       match: true,
+      userTaken: true,
     },
   };
 
@@ -62,7 +63,19 @@ class Register extends React.Component {
     return label;
   }
 
+  private checkUser(username: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username }),
+    };
+    fetch('localhost:30000/users/check', requestOptions)
+      .then((response) => response.json())
+      .then((data) => this.updateField({ userTaken: data.exists }));
+  }
+
   private getForm() {
+    const { match } = this.state.form;
     return (
       <form>
         <div className="input-field">
@@ -70,9 +83,11 @@ class Register extends React.Component {
           <InputText
             className=""
             value={this.state.form.login}
-            onChange={(event) =>
-              this.updateField({ login: (event.target as HTMLInputElement).value })
-            }
+            onChange={(event) => {
+              this.updateField({ login: (event.target as HTMLInputElement).value });
+              this.checkUser((event.target as HTMLInputElement).value);
+            }}
+            required
           />
         </div>
         <div className="input-field">
@@ -82,6 +97,7 @@ class Register extends React.Component {
             onChange={(event) =>
               this.updateField({ email: (event.target as HTMLInputElement).value })
             }
+            required
           />
         </div>
         <div className="input-field">
@@ -91,6 +107,7 @@ class Register extends React.Component {
             onChange={(event) =>
               this.updateField({ password: (event.target as HTMLInputElement).value })
             }
+            required
           />
         </div>
         <div className="input-field">
@@ -104,10 +121,11 @@ class Register extends React.Component {
                 (event.target as HTMLInputElement).value,
               );
             }}
+            required
           />
         </div>
         {this.buildLabel()}
-        <Button label="Sign Up" />
+        <Button disabled={!match} label="Sign Up" />
       </form>
     );
   }
