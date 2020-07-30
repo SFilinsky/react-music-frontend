@@ -16,9 +16,12 @@
     "primereact": "^4.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
     "build:css": "node-sass src/ -o src/ ",
@@ -76,7 +79,7 @@
     "prettier": "^2.0.5",
     "stylelint": "^13.6.0",
     "stylelint-config-standard": "^20.0.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {

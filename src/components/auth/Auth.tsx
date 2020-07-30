@@ -26,13 +26,13 @@ class Auth extends React.Component {
   }
 
   private updateField(patch: any) {
-    this.setState({
-      ...this.state,
+    this.setState((state: any) => ({
+      ...state,
       form: {
-        ...this.state.form,
+        ...state.form,
         ...patch,
       },
-    });
+    }));
   }
 
   render() {
