@@ -16,7 +16,7 @@ class Register extends React.Component {
       email: '',
       validPassword: '',
       match: true,
-      userTaken: true,
+      userTaken: false,
     },
   };
 
@@ -48,19 +48,15 @@ class Register extends React.Component {
     this.updateField({ match: first === second });
   }
 
-  private buildLabel() {
-    const { match } = this.state.form;
-    let label;
-    if (match) {
-      label = <label></label>;
-    } else {
-      label = (
+  private buildLabel(condition: boolean, text: string) {
+    if (condition) {
+      return (
         <div className="margi">
-          <label className="h5">Passwords do not match</label>
+          <label className="h5"> {text}</label>
         </div>
       );
     }
-    return label;
+    return null;
   }
 
   private checkUser(username: string) {
@@ -69,13 +65,12 @@ class Register extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username }),
     };
-    fetch('localhost:30000/users/check', requestOptions)
+    fetch('http://localhost:30000/users/check', requestOptions)
       .then((response) => response.json())
-      .then((data) => this.updateField({ userTaken: data.exists }));
+      .then((data) => this.updateField({ userTaken: data.body.exists }));
   }
 
   private getForm() {
-    const { match } = this.state.form;
     return (
       <form>
         <div className="input-field">
@@ -90,6 +85,7 @@ class Register extends React.Component {
             required
           />
         </div>
+        {this.buildLabel(this.state.form.userTaken, 'User is already taken!')}
         <div className="input-field">
           <label className="h3"> E-mail </label>
           <InputText
@@ -124,8 +120,8 @@ class Register extends React.Component {
             required
           />
         </div>
-        {this.buildLabel()}
-        <Button disabled={!match} label="Sign Up" />
+        {this.buildLabel(!this.state.form.match, 'Passwords do not match')}
+        <Button disabled={!this.state.form.match} label="Sign Up" />
       </form>
     );
   }
