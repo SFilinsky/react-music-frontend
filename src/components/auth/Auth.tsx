@@ -43,11 +43,27 @@ class Auth extends React.Component {
     }));
   }
 
+  private login(username: string, password: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    };
+    fetch('http://localhost:30000/auth/login', requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data.accessToken));
+  }
+
   render() {
     return (
       <div ref={this.wrapper as RefObject<HTMLDivElement>} className="rm-auth">
         <Card>
-          <form onSubmit={this.handleSubmit}>
+          <form
+            onSubmit={(event) => {
+              this.login(this.state.form.login, this.state.form.password);
+              this.handleSubmit(event);
+            }}
+          >
             <div className="input-field">
               <label htmlFor="login" className="h3">
                 Username

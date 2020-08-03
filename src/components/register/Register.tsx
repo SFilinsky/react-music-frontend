@@ -1,10 +1,12 @@
-import React, { createRef, FormEvent, RefObject } from 'react';
+import React, { createRef, FormEvent, ReactComponentElement, RefObject } from 'react';
 import './Register.scss';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import ReactDOM from 'react-dom';
 import { Button } from 'primereact/button';
+import { Route, Redirect } from 'react-router-dom';
+import { NULL } from 'node-sass';
 
 class Register extends React.Component {
   wrapper = createRef();
@@ -17,6 +19,9 @@ class Register extends React.Component {
       validPassword: '',
       match: true,
       userTaken: false,
+      emailTaken: false,
+      emailInvalid: false,
+      filled: false,
     },
   };
 
@@ -48,6 +53,11 @@ class Register extends React.Component {
     this.updateField({ match: first === second });
   }
 
+  private redirect() {
+    if (this.state.form.filled === true) return <Redirect to="localhost:3000" />;
+    return null;
+  }
+
   private buildLabel(condition: boolean, text: string) {
     if (condition) {
       return (
@@ -70,10 +80,49 @@ class Register extends React.Component {
       .then((data) => this.updateField({ userTaken: data.body.exists }));
   }
 
+  private checkEmailExistence(email: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    };
+    fetch('http://localhost:30000/users/check-email', requestOptions)
+      .then((response) => response.json())
+      .then((data) => this.updateField({ emailTaken: data.body.exists }));
+  }
+
+  private register(username: string, password: string, email: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: 'https://localhost:3000',
+      },
+      body: JSON.stringify({ username, password, email }),
+    };
+    fetch('http://localhost:30000/auth/register', requestOptions).then(() => {
+      this.updateField({ filled: true });
+    });
+  }
+
+  private checkEmail(email: string) {
+    const re = RegExp(
+      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    );
+    this.updateField({ emailInvalid: !email.match(re) });
+  }
+
   private getForm() {
     return (
-      <form>
+      <form
+        onSubmit={(event) => {
+          this.register(this.state.form.login, this.state.form.password, this.state.form.email);
+          this.updateField({ filled: false });
+          this.handleSubmit(event);
+        }}
+      >
         <div className="input-field">
+          {this.redirect()}
           <label className="h3"> Username</label>
           <InputText
             className=""
@@ -90,12 +139,16 @@ class Register extends React.Component {
           <label className="h3"> E-mail </label>
           <InputText
             value={this.state.form.email}
-            onChange={(event) =>
-              this.updateField({ email: (event.target as HTMLInputElement).value })
-            }
+            onChange={(event) => {
+              this.updateField({ email: (event.target as HTMLInputElement).value });
+              this.checkEmail((event.target as HTMLInputElement).value);
+              this.checkEmailExistence((event.target as HTMLInputElement).value);
+            }}
             required
           />
         </div>
+        {this.buildLabel(this.state.form.emailInvalid, 'Invalid email')}
+        {this.buildLabel(this.state.form.emailTaken, 'Email is already taken!')}
         <div className="input-field">
           <label className="h3"> Password </label>
           <Password
