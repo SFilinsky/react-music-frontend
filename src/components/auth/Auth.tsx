@@ -6,8 +6,11 @@ import { Card } from 'primereact/card';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import ReactDOM from 'react-dom';
+import { AppState } from '../../redux/app.state';
+import { AuthThunks } from '../../redux/feature/auth/auth.action';
+import { connect } from 'react-redux';
 
-class Auth extends React.Component {
+class Auth extends React.Component<PropsFromConnector & {}> {
   wrapper = createRef();
 
   componentDidMount() {
@@ -22,14 +25,14 @@ class Auth extends React.Component {
     },
   };
 
-  constructor(props: any) {
+  constructor(props: PropsFromConnector & {}) {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   private handleSubmit(event: FormEvent) {
-    // Console.log(this.state);
+    this.login(this.state.form.login, this.state.form.password);
     event.preventDefault();
   }
 
@@ -50,8 +53,10 @@ class Auth extends React.Component {
       body: JSON.stringify({ username, password }),
     };
     fetch('http://localhost:30000/auth/login', requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data.accessToken));
+      .then((response: Response) => response.json())
+      .then((data: { accessToken: string }) =>
+        this.props.onAuthSuccess({ token: data.accessToken }),
+      );
   }
 
   render() {
@@ -60,7 +65,6 @@ class Auth extends React.Component {
         <Card>
           <form
             onSubmit={(event) => {
-              this.login(this.state.form.login, this.state.form.password);
               this.handleSubmit(event);
             }}
           >
@@ -102,4 +106,18 @@ class Auth extends React.Component {
   }
 }
 
-export default Auth;
+const mapState = (state: AppState) => ({});
+
+const mapDispatch = {
+  onAuthSuccess: ({ token }: { token: string }) => AuthThunks.saveToken({ token }),
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type stateProps = ReturnType<typeof mapState>;
+type dispatchProps = typeof mapDispatch;
+
+type PropsFromConnector = stateProps & dispatchProps;
+
+// @ts-ignore
+export default connector(Auth);

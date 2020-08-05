@@ -28,6 +28,7 @@ module.exports = {
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-ts-ignore': 'warn',
         'default-param-last': 'off',
         'one-var': 'off',
         'new-cap': 'off',

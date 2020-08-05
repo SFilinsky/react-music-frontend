@@ -1,7 +1,8 @@
-import { AppState, initialState } from './app.state';
-import { Action, Reducer } from 'redux';
+import { combineReducers } from 'redux';
 import { userReducer } from './feature/user/user.reducer';
+import { authReducer } from './feature/auth/auth.reducer';
 
-export const appReducer: Reducer<AppState> = (state: AppState = initialState, action: Action) => ({
-  user: userReducer(state.user, action),
+export const appReducer = combineReducers({
+  user: userReducer,
+  auth: authReducer,
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Auth from '../../auth/Auth';
 import Register from '../../register/Register';
 import './auth-layout.scss';
+import Auth from '../../auth/Auth';
 
 export class AuthLayout extends React.Component {
   render() {

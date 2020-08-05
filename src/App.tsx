@@ -7,8 +7,7 @@ import { MainLayout } from './components/layouts/main-layout/main-layout';
 import 'primereact/resources/themes/nova-dark/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { store } from './redux/app.state';
-import { UserActions } from './redux/feature/user/user.action';
+import AuthGuard from './core/guarded-route/guarded-route';
 
 class App extends React.Component {
   render() {
@@ -16,9 +15,9 @@ class App extends React.Component {
       <div className="rm-app">
         <BrowserRouter>
           <Switch>
-            <Route path="/main">
+            <AuthGuard path="/main" redirect="/">
               <MainLayout />
-            </Route>
+            </AuthGuard>
             <Route path="/">
               <AuthLayout />
             </Route>
