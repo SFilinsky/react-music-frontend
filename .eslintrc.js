@@ -44,5 +44,7 @@ module.exports = {
         'no-ternary': 'off',
         "prettier/prettier": ["error"],
         "max-lines-per-function": "warn",
+        "prefer-named-capture-group": "warn",
+        "no-useless-escape": "warn",
     },
 };
