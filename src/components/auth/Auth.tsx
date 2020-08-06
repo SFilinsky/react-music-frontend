@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import { AppState } from '../../redux/app.state';
 import { AuthThunks } from '../../redux/feature/auth/auth.action';
 import { connect } from 'react-redux';
+import { AuthEndpoints } from '../../endpoint/auth.endpoints';
 
 class Auth extends React.Component<PropsFromConnector & {}> {
   wrapper = createRef();
@@ -47,16 +48,9 @@ class Auth extends React.Component<PropsFromConnector & {}> {
   }
 
   private login(username: string, password: string) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    };
-    fetch('http://localhost:30000/auth/login', requestOptions)
-      .then((response: Response) => response.json())
-      .then((data: { accessToken: string }) =>
-        this.props.onAuthSuccess({ token: data.accessToken }),
-      );
+    AuthEndpoints.login(username, password).then((data: { accessToken: string }) =>
+      this.props.onAuthSuccess({ token: data.accessToken }),
+    );
   }
 
   render() {

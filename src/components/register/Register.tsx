@@ -1,12 +1,12 @@
-import React, { createRef, FormEvent, ReactComponentElement, RefObject } from 'react';
+import React, { createRef, FormEvent, RefObject } from 'react';
 import './Register.scss';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import ReactDOM from 'react-dom';
 import { Button } from 'primereact/button';
-import { Route, Redirect } from 'react-router-dom';
-import { NULL } from 'node-sass';
+import { Redirect } from 'react-router-dom';
+import { AuthEndpoints } from '../../endpoint/auth.endpoints';
 
 class Register extends React.Component {
   wrapper = createRef();
@@ -92,15 +92,7 @@ class Register extends React.Component {
   }
 
   private register(username: string, password: string, email: string) {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Origin: 'https://localhost:3000',
-      },
-      body: JSON.stringify({ username, password, email }),
-    };
-    fetch('http://localhost:30000/auth/register', requestOptions).then(() => {
+    AuthEndpoints.register(username, password, email).then(() => {
       this.updateField({ filled: true });
     });
   }
