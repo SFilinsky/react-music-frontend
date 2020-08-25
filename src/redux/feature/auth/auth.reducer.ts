@@ -9,7 +9,7 @@ export const initialAuthState: AuthState = {
   token: null,
 };
 
-const setToken = (state: AuthState, value: string) => ({
+const setToken = (state: AuthState, value: string): AuthState => ({
   ...state,
   token: value,
 });

@@ -1,0 +1,16 @@
+.rm-main-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  max-height: 100%;
+  box-sizing: border-box; }
+  .rm-main-layout header .bp3-card {
+    height: 3rem; }
+  .rm-main-layout > .content {
+    flex: 1 1 auto;
+    padding: 1rem;
+    box-sizing: border-box; }
+  .rm-main-layout footer .bp3-card {
+    height: 1rem;
+    padding: 0 1rem; }

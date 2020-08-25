@@ -1,3 +1,6 @@
+@import url(~normalize.css);
+@import url(~@blueprintjs/core/lib/css/blueprint.css);
+@import url(~@blueprintjs/icons/lib/css/blueprint-icons.css);
 .rm-app {
   text-align: center;
   width: 100%;

@@ -1,15 +1,12 @@
 import React, { createRef, FormEvent, RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.scss';
-import { InputText } from 'primereact/inputtext';
-import { Card } from 'primereact/card';
-import { Password } from 'primereact/password';
-import { Button } from 'primereact/button';
 import ReactDOM from 'react-dom';
 import { AppState } from '../../redux/app.state';
 import { AuthThunks } from '../../redux/feature/auth/auth.action';
 import { connect } from 'react-redux';
 import { AuthEndpoints } from '../../endpoint/auth.endpoints';
+import { Button, Card, InputGroup } from '@blueprintjs/core';
 
 class Auth extends React.Component<PropsFromConnector & {}> {
   wrapper = createRef();
@@ -66,10 +63,11 @@ class Auth extends React.Component<PropsFromConnector & {}> {
               <label htmlFor="login" className="h3">
                 Username
               </label>
-              <InputText
+              <InputGroup
                 id="login"
+                type="text"
                 value={this.state.form.login}
-                onChange={(event) =>
+                onChange={(event: any) =>
                   this.updateField({ login: (event.target as HTMLInputElement).value })
                 }
               />
@@ -79,16 +77,17 @@ class Auth extends React.Component<PropsFromConnector & {}> {
               <label htmlFor="password" className="h3">
                 Password
               </label>
-              <Password
+              <InputGroup
                 id="password"
+                type="password"
                 value={this.state.form.password}
-                onChange={(event) =>
+                onChange={(event: any) =>
                   this.updateField({ password: (event.target as HTMLInputElement).value })
                 }
               />
             </div>
 
-            <Button label="Log In" />
+            <Button> Log In </Button>
             <Link to="/register" className="register-link">
               {' '}
               Not registered yet?{' '}

@@ -1,12 +1,9 @@
 import React, { createRef, FormEvent, RefObject } from 'react';
 import './Register.scss';
-import { Card } from 'primereact/card';
-import { InputText } from 'primereact/inputtext';
-import { Password } from 'primereact/password';
 import ReactDOM from 'react-dom';
-import { Button } from 'primereact/button';
 import { Redirect } from 'react-router-dom';
 import { AuthEndpoints } from '../../endpoint/auth.endpoints';
+import { Button, Card, InputGroup } from '@blueprintjs/core';
 
 class Register extends React.Component {
   wrapper = createRef();
@@ -61,7 +58,7 @@ class Register extends React.Component {
   private buildLabel(condition: boolean, text: string) {
     if (condition) {
       return (
-        <div className="margi">
+        <div className="margin">
           <label className="h5"> {text}</label>
         </div>
       );
@@ -116,10 +113,10 @@ class Register extends React.Component {
         <div className="input-field">
           {this.redirect()}
           <label className="h3"> Username</label>
-          <InputText
-            className=""
+          <InputGroup
+            type="text"
             value={this.state.form.login}
-            onChange={(event) => {
+            onChange={(event: any) => {
               this.updateField({ login: (event.target as HTMLInputElement).value });
               this.checkUser((event.target as HTMLInputElement).value);
             }}
@@ -129,9 +126,10 @@ class Register extends React.Component {
         {this.buildLabel(this.state.form.userTaken, 'User is already taken!')}
         <div className="input-field">
           <label className="h3"> E-mail </label>
-          <InputText
+          <InputGroup
+            type="text"
             value={this.state.form.email}
-            onChange={(event) => {
+            onChange={(event: any) => {
               this.updateField({ email: (event.target as HTMLInputElement).value });
               this.checkEmail((event.target as HTMLInputElement).value);
               this.checkEmailExistence((event.target as HTMLInputElement).value);
@@ -143,9 +141,10 @@ class Register extends React.Component {
         {this.buildLabel(this.state.form.emailTaken, 'Email is already taken!')}
         <div className="input-field">
           <label className="h3"> Password </label>
-          <Password
+          <InputGroup
+            type="password"
             value={this.state.form.password}
-            onChange={(event) =>
+            onChange={(event: any) =>
               this.updateField({ password: (event.target as HTMLInputElement).value })
             }
             required
@@ -153,9 +152,10 @@ class Register extends React.Component {
         </div>
         <div className="input-field">
           <label className="h3"> Confirm your password </label>
-          <Password
+          <InputGroup
+            type="password"
             value={this.state.form.validPassword}
-            onChange={(event) => {
+            onChange={(event: any) => {
               this.updateField({ validPassword: (event.target as HTMLInputElement).value });
               this.checkPasswords(
                 this.state.form.password,
@@ -166,7 +166,7 @@ class Register extends React.Component {
           />
         </div>
         {this.buildLabel(!this.state.form.match, 'Passwords do not match')}
-        <Button disabled={!this.state.form.match} label="Sign Up" />
+        <Button disabled={!this.state.form.match}> Sign Up </Button>
       </form>
     );
   }
