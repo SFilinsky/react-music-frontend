@@ -3,19 +3,23 @@ import { AppState } from '../../redux/app.state';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const AuthGuard = (
-  props: PropsFromConnector & { redirect: string; path: string; children: React.ReactNode },
+const GuardedRoute = (
+  props: PropsFromConnector & {
+    cond: boolean;
+    redirect: string;
+    path: string;
+    children: React.ReactNode;
+  },
 ) => {
+  console.log(`Cond: ${props.cond}`);
   return (
     <Route path={props.path}>
-      {props.token ? props.children : <Redirect to={props.redirect} />}
+      {props.cond ? props.children : <Redirect to={props.redirect} />}
     </Route>
   );
 };
 
-const mapState = (state: AppState) => ({
-  token: state.auth.token,
-});
+const mapState = (state: AppState) => ({});
 
 const mapDispatch = {};
 
@@ -26,5 +30,4 @@ type dispatchProps = typeof mapDispatch;
 
 type PropsFromConnector = stateProps & dispatchProps;
 
-// @ts-ignore
-export default connector(AuthGuard);
+export default connector(GuardedRoute);

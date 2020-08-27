@@ -1,21 +1,14 @@
 import React, { createRef, FormEvent, RefObject } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.scss';
-import ReactDOM from 'react-dom';
 import { AppState } from '../../redux/app.state';
 import { AuthThunks } from '../../redux/feature/auth/auth.action';
 import { connect } from 'react-redux';
 import { AuthEndpoints } from '../../endpoint/auth.endpoints';
 import { Button, Card, InputGroup } from '@blueprintjs/core';
+import ReactDOM from 'react-dom';
 
 class Auth extends React.Component<PropsFromConnector & {}> {
-  wrapper = createRef();
-
-  componentDidMount() {
-    const node = ReactDOM.findDOMNode(this);
-    /* Uses DOM node  */
-  }
-
   state = {
     form: {
       login: '',
@@ -52,7 +45,7 @@ class Auth extends React.Component<PropsFromConnector & {}> {
 
   render() {
     return (
-      <div ref={this.wrapper as RefObject<HTMLDivElement>} className="rm-auth">
+      <div className="rm-auth">
         <Card>
           <form
             onSubmit={(event) => {
@@ -87,7 +80,7 @@ class Auth extends React.Component<PropsFromConnector & {}> {
               />
             </div>
 
-            <Button> Log In </Button>
+            <Button type={'submit'}> Log In </Button>
             <Link to="/register" className="register-link">
               {' '}
               Not registered yet?{' '}

@@ -1,6 +1,5 @@
-import React, { createRef, FormEvent, RefObject } from 'react';
+import React, { createRef, FormEvent } from 'react';
 import './Register.scss';
-import ReactDOM from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import { AuthEndpoints } from '../../endpoint/auth.endpoints';
 import { Button, Card, InputGroup } from '@blueprintjs/core';
@@ -26,10 +25,6 @@ class Register extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
-  }
-
-  componentDidMount() {
-    const node = ReactDOM.findDOMNode(this);
   }
 
   private handleSubmit(event: FormEvent) {
@@ -173,7 +168,7 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div ref={this.wrapper as RefObject<HTMLDivElement>} className="rm-register">
+      <div className="rm-register">
         <Card>{this.getForm()}</Card>
       </div>
     );
