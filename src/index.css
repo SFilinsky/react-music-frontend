@@ -16,8 +16,7 @@ body,
 
 div {
   display: flex;
-  flex-direction: row;
-  flex: 1 0 auto; }
+  flex-direction: row; }
 
 .h1 {
   font-size: 24px;

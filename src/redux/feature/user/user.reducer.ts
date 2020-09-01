@@ -9,12 +9,15 @@ export const initialUserState: UserState = {
   usersList: [],
 };
 
-const saveUserList = (state: any[], action: AnyAction) => action.userList;
+const saveUserList = (state: UserState, usersList: any[]): UserState => ({
+  ...state,
+  usersList,
+});
 
 export const userReducer = (state: UserState = initialUserState, action: AnyAction) => {
   switch (action.type) {
     case UserActionTypes.setUserList:
-      return saveUserList(state.usersList, action);
+      return saveUserList(state, action.userList);
     default:
       return state;
   }

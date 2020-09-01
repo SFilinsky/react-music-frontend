@@ -1,0 +1,23 @@
+.rm-main-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  max-height: 100%;
+  width: 100%;
+  box-sizing: border-box; }
+  .rm-main-layout header, .rm-main-layout footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center; }
+    .rm-main-layout header > .bp3-card, .rm-main-layout footer > .bp3-card {
+      height: 3rem;
+      padding: 0.5rem 1rem;
+      width: 100%; }
+  .rm-main-layout > .content {
+    width: 100%;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box; }

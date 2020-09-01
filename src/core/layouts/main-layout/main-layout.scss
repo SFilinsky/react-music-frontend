@@ -1,0 +1,33 @@
+@import "src/variables.scss";
+
+.rm-main-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  max-height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+  header,
+  footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+
+    & > .bp3-card {
+      height: $header-height;
+      padding: $padding-s $padding-m;
+      width: 100%;
+    }
+  }
+
+  & > .content {
+    width: 100%;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: $padding-m;
+    box-sizing: border-box;
+  }
+}

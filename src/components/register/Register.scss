@@ -1,24 +1,29 @@
 .rm-register {
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.rm-register .p-card {
+.rm-register .bp3-card {
   width: 15rem;
   height: fit-content;
   flex: 0 0 auto;
 }
 
-.margi {
-  margin-top: -1rem;
-  color: red;
+.rm-register .input-field {
+  margin-bottom: 1rem;
+
+  .bp3-input-group {
+    width: 100%;
+  }
 }
 
 .rm-register form {
   width: 100%;
   height: 100%;
 
-  button {
+  .bp3-button {
     width: 100%;
+    margin: 0.5rem auto;
   }
 }

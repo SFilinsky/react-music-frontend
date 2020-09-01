@@ -1,4 +1,4 @@
-import { store } from '../../app.state';
+import { AppThunkDispatch, store } from '../../app.state';
 import { AuthConstants } from '../../../constants/auth.constants';
 
 const key = 'AUTH';
@@ -14,19 +14,18 @@ export const AuthActions = {
   }),
 };
 
-// @ts-ignore
 export const AuthThunks = {
-  saveToken: ({ token }: { token: string }) => (dispatch: typeof store.dispatch) => {
+  saveToken: ({ token }: { token: string }) => (dispatch: AppThunkDispatch) => {
     dispatch(AuthActions.setToken({ token }));
     window.localStorage.setItem(AuthConstants.TOKEN_STORAGE_KEY, token);
   },
 
-  removeToken: () => (dispatch: typeof store.dispatch) => {
+  removeToken: () => (dispatch: AppThunkDispatch) => {
     dispatch(AuthActions.setToken({ token: null }));
     window.localStorage.removeItem(AuthConstants.TOKEN_STORAGE_KEY);
   },
 
-  loadToken: () => (dispatch: typeof store.dispatch) => {
+  loadToken: () => (dispatch: AppThunkDispatch) => {
     dispatch(
       AuthActions.setToken({ token: window.localStorage.getItem(AuthConstants.TOKEN_STORAGE_KEY) }),
     );

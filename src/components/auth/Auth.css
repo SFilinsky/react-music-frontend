@@ -1,8 +1,10 @@
 .rm-auth {
+  display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  width: 100%; }
 
-.rm-auth .p-card {
+.rm-auth .bp3-card {
   width: 15rem;
   height: fit-content;
   flex: 0 0 auto; }
@@ -10,13 +12,18 @@
 .rm-auth .input-field {
   margin-bottom: 1rem; }
 
+.rm-auth .input-field .bp3-input-group {
+  width: 100%; }
+
 .rm-auth form {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%; }
-  .rm-auth form label {
-    text-align: left; }
-  .rm-auth form .p-button {
-    width: 100%;
-    margin: 0.5rem auto 0.5rem; }
+
+.rm-auth form label {
+  text-align: left; }
+
+.rm-auth form .bp3-button {
+  width: 100%;
+  margin: 0.5rem auto; }

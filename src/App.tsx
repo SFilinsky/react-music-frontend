@@ -1,25 +1,32 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+import { AuthLayout } from './core/layouts/auth-layout/auth-layout';
+import { MainLayout } from './core/layouts/main-layout/main-layout';
 import './App.scss';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { AuthLayout } from './components/layouts/auth-layout/auth-layout';
-import { MainLayout } from './components/layouts/main-layout/main-layout';
+import { AppState } from './redux/app.state';
+import { connect } from 'react-redux';
+import GuardedRoute from './core/guarded-route/guarded-route';
 
-import 'primereact/resources/themes/nova-dark/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import AuthGuard from './core/guarded-route/guarded-route';
+class App extends React.Component<PropsFromConnector> {
+  constructor(props: PropsFromConnector) {
+    super(props);
+  }
 
-class App extends React.Component {
   render() {
+    console.log(Boolean(this.props.token));
     return (
       <div className="rm-app">
         <BrowserRouter>
           <Switch>
-            <AuthGuard path="/main" redirect="/">
+            <GuardedRoute cond={Boolean(this.props.token)} path="/main" redirect="/auth">
               <MainLayout />
-            </AuthGuard>
-            <Route path="/">
+            </GuardedRoute>
+            <GuardedRoute cond={!this.props.token} path="/auth" redirect="/main">
               <AuthLayout />
+            </GuardedRoute>
+            <Route path="/">
+              <Redirect to={'/auth'} />
             </Route>
           </Switch>
         </BrowserRouter>
@@ -28,4 +35,18 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapState = (state: AppState) => ({
+  token: state.auth.token,
+});
+
+const mapDispatch = {};
+
+const connector = connect(mapState, mapDispatch);
+
+type stateProps = ReturnType<typeof mapState>;
+type dispatchProps = typeof mapDispatch;
+
+type PropsFromConnector = stateProps & dispatchProps;
+
+// @ts-ignore
+export default connector(App);
