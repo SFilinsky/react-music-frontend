@@ -1,0 +1,6 @@
+.rm-item-list {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem; }
+  .rm-item-list > .rm-item {
+    margin-bottom: 1rem; }

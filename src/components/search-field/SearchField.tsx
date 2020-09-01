@@ -5,10 +5,14 @@ import { InputGroup } from '@blueprintjs/core';
 import React from 'react';
 import { SearchSelectors } from '../../redux/feature/search/search.selector';
 
+import './SearchField.scss';
+
 const SearchField = (props: PropsFromConnector & {}) => (
   <InputGroup
+    className={'rm-search-field'}
     type={'text'}
     value={props.query}
+    placeholder={'Enter some query'}
     onChange={(event: any) => props.doQuery({ query: (event.target as HTMLInputElement).value })}
   />
 );

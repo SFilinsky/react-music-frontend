@@ -2,6 +2,7 @@ import React from 'react';
 import './main-layout.scss';
 import { Card } from '@blueprintjs/core';
 import SearchField from '../../../components/search-field/SearchField';
+import ItemList from '../../../components/item-list/ItemList';
 
 export class MainLayout extends React.Component {
   render() {
@@ -9,16 +10,21 @@ export class MainLayout extends React.Component {
       <div className={'rm-main-layout'}>
         <header>
           <Card>
-            Search
+            <div>Search</div>
             <SearchField />
           </Card>
         </header>
         <div className="content">
-          Main
-          <SearchField />
+          <div>
+            <div>Search Here</div>
+            <SearchField />
+          </div>
+          <ItemList />
         </div>
         <footer>
-          <Card>footer</Card>
+          <Card>
+            <div>Footer</div>
+          </Card>
         </footer>
       </div>
     );

@@ -1,4 +1,4 @@
-import React, { createRef, FormEvent, RefObject } from 'react';
+import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.scss';
 import { AppState } from '../../redux/app.state';
@@ -6,7 +6,6 @@ import { AuthThunks } from '../../redux/feature/auth/auth.action';
 import { connect } from 'react-redux';
 import { AuthEndpoints } from '../../endpoint/auth.endpoints';
 import { Button, Card, InputGroup } from '@blueprintjs/core';
-import ReactDOM from 'react-dom';
 
 class Auth extends React.Component<PropsFromConnector & {}> {
   state = {

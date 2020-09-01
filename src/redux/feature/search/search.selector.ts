@@ -8,4 +8,5 @@ export const SearchSelectors = {
   root,
   getQuery: createSelector([root], (state: SearchState) => state.query),
   getController: createSelector([root], (state: SearchState) => state.requestController),
+  getItems: createSelector([root], (state: SearchState) => state.items),
 };
